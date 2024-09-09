@@ -1,0 +1,30 @@
+#catalog {
+  width: 240px;
+  height: 100%;
+}
+
+@media (prefers-color-scheme: dark) {
+  #catalog {
+    background: #202020;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  #catalog {
+    background: #a8a8a8;
+  }
+}
+
+#passwordView {
+  width: calc(100% - 240px);
+  height: 100%;
+}
+
+#passwordContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}

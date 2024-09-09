@@ -1,0 +1,56 @@
+:root {
+  --fallback-title-bar-height: 32px;
+}
+
+.draggable {
+  app-region: drag;
+  /* Pre-fix app-region during standardization process */
+  -webkit-app-region: drag;
+}
+
+.nonDraggable {
+  app-region: no-drag;
+  /* Pre-fix app-region during standardization process */
+  -webkit-app-region: no-drag;
+}
+
+#titleBarContainer {
+  position: absolute;
+  top: env(titlebar-area-y, 0);
+  height: env(titlebar-area-height, var(--fallback-title-bar-height));
+  width: 100%;
+  background-color:#2f3241;
+}
+
+#titleBar {
+  position: absolute;
+  top: 0;
+  display: flex;
+  user-select: none;
+  height: 100%;
+  left: env(titlebar-area-x, 0);
+  width: env(titlebar-area-width, 100%);
+
+  color: #74b1be;
+  font-weight: bold;
+  text-align: center;
+}
+
+#titleBar > #title {
+  margin: auto;
+  padding: 0px 16px 0px 16px;
+  margin-left: 0;
+}
+
+#titleBar > #title > #author {
+  padding-left: 2px;
+  font-size: 0.66em;
+  font-weight: lighter;
+  font-style: italic;
+}
+
+#mainContent {
+  width: 100%;
+  height: 100%;
+  border: none;
+}

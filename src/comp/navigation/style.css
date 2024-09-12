@@ -1,6 +1,8 @@
 #menuBar {
   width: 70px;
   height: 100%;
+  min-width: 70px;
+  max-width: 70px;
 }
 
 @media (prefers-color-scheme: dark) {

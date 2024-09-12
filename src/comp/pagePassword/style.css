@@ -1,6 +1,12 @@
 #catalog {
   width: 240px;
   height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  --sb-track-color: #0000;
+  --sb-thumb-color: #92492000;
+  --sb-size: 6px;
+  user-select: none;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -27,4 +33,30 @@
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
+}
+
+#catalog:hover {
+  --sb-thumb-color: #924920;
+}
+
+#catalog::-webkit-scrollbar {
+  width: var(--sb-size);
+}
+
+#catalog::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 3px;
+}
+
+#catalog::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 3px;
+  border: 1px solid #0000;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  #catalog {
+      scrollbar-color: var(--sb-thumb-color)
+                     var(--sb-track-color);
+  }
 }

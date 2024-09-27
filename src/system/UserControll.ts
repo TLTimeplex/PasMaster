@@ -9,7 +9,7 @@ interface User {
   password: string;
 }
 
-let user: string;
+export let user: string;
 let userPassword: string;
 
 let userDB: Database;

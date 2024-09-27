@@ -17,3 +17,9 @@ contextBridge.exposeInMainWorld('passwordEntry', {
   addEntry: (entry: PasswordEntry, category?: string) => ipcRenderer.invoke('passwordEntry:add', entry, category),
   deleteEntry: (id: string) => ipcRenderer.invoke('passwordEntry:delete', id)
 })
+
+contextBridge.exposeInMainWorld('masterPassword', {
+  getAllUsers: () => ipcRenderer.invoke('masterPassword:getAllUsers'),
+  createUser: (username: string, password: string) => ipcRenderer.invoke('masterPassword:createUser', username, password),
+  login: (username: string, password: string) => ipcRenderer.invoke('masterPassword:login', username, password),
+})

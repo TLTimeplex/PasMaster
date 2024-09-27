@@ -2,9 +2,11 @@ import { useState } from "react";
 import "./style.css"
 import { PageGeneratePassword } from "../pageGeneratePassword";
 import { PagePassword } from "../pagePassword";
+import { MasterPassword } from "../masterPassword";
 
 export const Navigation = () => {
   const [currentPage, setCurrentPage] = useState<JSX.Element>(<></>);
+  const [isLogged, setIsLogged] = useState<boolean>(false);
 
   // PAGES //
   const page_gp = <PageGeneratePassword></PageGeneratePassword>;
@@ -43,6 +45,14 @@ export const Navigation = () => {
       <div id="contentContainer">
         {currentPage}
       </div>
+      {isLogged
+        ?
+        <></>
+        :
+        <div id="MasterPasswordContainer">
+          <MasterPassword onLogin={() => setIsLogged(true)}></MasterPassword>
+        </div>
+      }
     </div>
   );
 }

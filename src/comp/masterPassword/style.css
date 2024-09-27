@@ -1,0 +1,75 @@
+#MasterPassword {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgb(199, 199, 199);
+  padding: 20px;
+  border: 2px solid rgb(255, 179, 0);
+  border-radius: 10px;
+  width: 300px;
+  height: auto;
+  color: black;
+}
+
+#MasterPasswordTitle {
+  color: black;
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  user-select: none;
+}
+
+#MasterPasswordUserDropdownSelect {
+  width: 300px;
+  height: 40px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #000;
+  background: white;
+  color: black;
+  font-size: 16px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+#MasterPasswordInput,
+#MasterPasswordInputRepeat,
+#UsernameInput {
+  width: 300px;
+  height: 40px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #000;
+  background: white;
+  color: black;
+  font-size: 16px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+#MasterPasswordInput.invalid,
+#MasterPasswordInputRepeat.invalid,
+#UsernameInput.invalid {
+  border: 1px solid red;
+}
+
+#MasterPasswordSubmit {
+  width: 300px;
+  height: 40px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #000;
+  background: rgb(255, 179, 0);
+  color: black;
+  font-size: 16px;
+  box-sizing: border-box;
+  cursor: pointer;
+  margin-top: 10px;
+  user-select: none;
+}
+
+.hidden {
+  display: none;
+}

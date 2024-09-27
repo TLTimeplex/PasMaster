@@ -1,7 +1,7 @@
 {
   "name": "pasmaster",
   "productName": "PasMaster",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A password Manager",
   "main": ".webpack/main",
   "scripts": {
@@ -21,6 +21,7 @@
     "@electron-forge/plugin-fuses": "^7.4.0",
     "@electron-forge/plugin-webpack": "^7.4.0",
     "@electron/fuses": "^1.8.0",
+    "@types/bcrypt": "^5.0.2",
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
@@ -55,9 +56,12 @@
     "url": "git+https://github.com/TLTimeplex/PasMaster.git"
   },
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "electron-squirrel-startup": "^1.0.1",
     "pasmaster": "file:",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^5.1.7"
   }
 }

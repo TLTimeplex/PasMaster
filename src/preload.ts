@@ -22,4 +22,5 @@ contextBridge.exposeInMainWorld('masterPassword', {
   getAllUsers: () => ipcRenderer.invoke('masterPassword:getAllUsers'),
   createUser: (username: string, password: string) => ipcRenderer.invoke('masterPassword:createUser', username, password),
   login: (username: string, password: string) => ipcRenderer.invoke('masterPassword:login', username, password),
+  logout: () => ipcRenderer.invoke('masterPassword:logout')
 })

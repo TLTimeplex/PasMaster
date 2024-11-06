@@ -6,7 +6,7 @@ import { MasterPassword } from "../masterPassword";
 
 export const Navigation = () => {
   const [currentPage, setCurrentPage] = useState<JSX.Element>(<></>);
-  const [isLogged, setIsLogged] = useState<boolean>(false);
+  const [isLogged, setIsLogged] = useState<boolean>(true); // TODO: Change to false 
 
   // PAGES //
   const page_gp = <PageGeneratePassword></PageGeneratePassword>;
@@ -38,6 +38,11 @@ export const Navigation = () => {
             <div className="menuItemImg"></div>
           </div>
           <div className="menuItem">
+            <div className="menuItemImg"></div>
+          </div>
+        </div>
+        <div id="menuBarBottom">
+          <div id="menu_settings" className="menuItem">
             <div className="menuItemImg"></div>
           </div>
         </div>

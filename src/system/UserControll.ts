@@ -20,7 +20,12 @@ const initDB = async () => {
     filename: `${app.getPath("userData")}/Vault/users.db`,
     driver: sqlite.Database
   });
-  await userDB.exec("CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT)");
+  await userDB.exec(
+    `CREATE TABLE IF NOT EXISTS "users"  (
+	  "username"	TEXT NOT NULL UNIQUE,
+	  "password"	TEXT NOT NULL,
+	  PRIMARY KEY("username")
+    );`);
 }
 
 export const getAllUsers = async () => {
@@ -58,6 +63,11 @@ export const login = async (username: string, password: string) => {
   userPassword = password;
 
   return true;
+}
+
+export const logout = () => {
+  user = "";
+  userPassword = "";
 }
 
 export const createMasterKey = (iv: crypto.BinaryLike) => {

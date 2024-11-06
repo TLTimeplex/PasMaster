@@ -159,19 +159,21 @@ export const MasterPassword = (props: MasterPasswordProps) => {
   return (
     <div id="MasterPassword">
       <div id="MasterPasswordTitle">Master Login</div>
-      <select id="MasterPasswordUserDropdownSelect" value={selectedUserIndex} onChange={hCUserSelect}>
-        {users?.map((user, index) => {
-          return <option key={index} value={index}>{user}</option>
-        })}
-        <option value={-1}>-- Create New --</option>
-      </select>
-      <input id="UsernameInput" type="text" placeholder={"Username"} className={selectedUserIndex === -1 ? '' : 'hidden'} onChange={hCUsername} value={username}></input>
-      <input id="MasterPasswordInput" type="password" placeholder={"Password"} onChange={hCPassword} value={password}></input>
-      <input id="MasterPasswordInputRepeat" type="password" placeholder={"Repeat Password"} className={selectedUserIndex === -1 ? '' : 'hidden'} onChange={hCPasswordRepeat} value={repeatPassword}></input>
-      <button id="MasterPasswordSubmit" onClick={submitForm}>{selectedUserIndex === -1 ? 'Register' : 'Login'}</button>
-      <div id="UsernameInputError" className='ErrorMessage'></div>
-      <div id="MasterPasswordError" className='ErrorMessage'></div>
-      <div id="MasterPasswordRepeatError" className='ErrorMessage'></div>
+      <form id="MasterPasswordForm" onSubmit={(e) => { e.preventDefault(); submitForm(); }}>
+        <select id="MasterPasswordUserDropdownSelect" value={selectedUserIndex} onChange={hCUserSelect}>
+          {users?.map((user, index) => {
+            return <option key={index} value={index}>{user}</option>
+          })}
+          <option value={-1}>-- Create New --</option>
+        </select>
+        <input id="UsernameInput" type="text" placeholder={"Username"} className={selectedUserIndex === -1 ? '' : 'hidden'} onChange={hCUsername} value={username}></input>
+        <input id="MasterPasswordInput" type="password" placeholder={"Password"} onChange={hCPassword} value={password} onSubmit={submitForm}></input>
+        <input id="MasterPasswordInputRepeat" type="password" placeholder={"Repeat Password"} className={selectedUserIndex === -1 ? '' : 'hidden'} onChange={hCPasswordRepeat} value={repeatPassword}></input>
+        <button id="MasterPasswordSubmit" type='submit'>{selectedUserIndex === -1 ? 'Register' : 'Login'}</button>
+        <div id="UsernameInputError" className='ErrorMessage'></div>
+        <div id="MasterPasswordError" className='ErrorMessage'></div>
+        <div id="MasterPasswordRepeatError" className='ErrorMessage'></div>
+      </form>
     </div>
   );
 }

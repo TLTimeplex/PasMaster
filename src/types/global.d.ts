@@ -34,6 +34,11 @@ interface Window {
      * @returns true if the login was successful, false if the login was not successful
      */
     login: (username: string, password: string) => Promise<boolean>;
+    /**
+     * Logout of the current user account
+     * @returns 
+     */
+    logout: () => Promise<void>;
   };
 }
 

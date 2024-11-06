@@ -1,7 +1,7 @@
 {
   "name": "pasmaster",
   "productName": "PasMaster",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "description": "A password Manager",
   "main": ".webpack/main",
   "scripts": {

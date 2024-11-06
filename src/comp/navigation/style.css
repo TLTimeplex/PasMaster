@@ -57,7 +57,8 @@
   transition: all 0.3s;
 }
 
-.menuItem:hover .menuItemImg, .menuItem.active .menuItemImg {
+.menuItem:hover .menuItemImg,
+.menuItem.active .menuItemImg {
   width: 48px;
   height: 48px;
 }
@@ -100,4 +101,14 @@
   justify-content: center;
   align-items: center;
   background-color: #0006;
+}
+
+#menuBarBottom {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-end;
+  height: calc(100% - 244px - 6px);
+  margin: auto;
 }

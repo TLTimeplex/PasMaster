@@ -71,7 +71,7 @@ export const logout = () => {
 }
 
 export const createMasterKey = (iv: crypto.BinaryLike) => {
-  return crypto.createCipheriv("aes-256-ctr", Buffer.from(userPassword), iv);
+  return crypto.createCipheriv("aes-256-ctr", userPassword, iv);
 }
 
 export const generateIV = () => {

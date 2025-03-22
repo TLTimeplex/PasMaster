@@ -29,10 +29,10 @@ export const Navigation = () => {
       <div id="menuBar">
         <div id="menuItemContainer">
           <div id="menu_password" className="menuItem" onClick={(e) => { setCurrentPage(page_p); setActive(e.currentTarget) }}>
-            <div className="menuItemImg"></div>
+            <div className="menuItemImg menuItemPasswordImg"></div>
           </div>
           <div id="menu_generator" className="menuItem" onClick={(e) => { setCurrentPage(page_gp); setActive(e.currentTarget) }}>
-            <div className="menuItemImg"></div>
+            <div className="menuItemImg menuItemGeneratorImg"></div>
           </div>
           <div className="menuItem">
             <div className="menuItemImg"></div>

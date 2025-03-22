@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="16"
+   height="16"
+   viewBox="0 0 16 16"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   sodipodi:docname="vault.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#252526"
+     bordercolor="#9500ff"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     showgrid="true"
+     inkscape:zoom="34.95259"
+     inkscape:cx="10.943395"
+     inkscape:cy="13.246515"
+     inkscape:window-width="1920"
+     inkscape:window-height="1011"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <sodipodi:guide
+       position="0,16"
+       orientation="0,16"
+       id="guide1"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="16,16"
+       orientation="16,0"
+       id="guide2"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="16,0"
+       orientation="0,-16"
+       id="guide3"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="0,0"
+       orientation="-16,0"
+       id="guide4"
+       inkscape:locked="false" />
+    <inkscape:grid
+       id="grid4"
+       units="px"
+       originx="8"
+       originy="8"
+       spacingx="1"
+       spacingy="1"
+       empcolor="#0099e5"
+       empopacity="0.30196078"
+       color="#0099e5"
+       opacity="0.14901961"
+       empspacing="5"
+       enabled="true"
+       visible="true" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:none;stroke:#9500ff;stroke-opacity:1;stroke-width:2;stroke-dasharray:none"
+       id="rect1"
+       width="14"
+       height="14"
+       x="1"
+       y="1" />
+    <circle
+       style="fill:#9500ff;fill-opacity:1;stroke:none;stroke-width:2.66667;stroke-dasharray:none;stroke-opacity:1"
+       id="path1"
+       cx="8"
+       cy="6"
+       r="2" />
+    <path
+       style="fill:#9500ff;fill-opacity:1;stroke:none;stroke-width:2;stroke-dasharray:none;stroke-opacity:1"
+       d="m 7,7 -1,5 h 4 L 9,7 Z"
+       id="path2"
+       sodipodi:nodetypes="ccccc" />
+  </g>
+</svg>

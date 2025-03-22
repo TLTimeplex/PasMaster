@@ -57,6 +57,14 @@
   transition: all 0.3s;
 }
 
+.menuItemGeneratorImg {
+  background-image: url("./img/generator.svg");
+}
+
+.menuItemPasswordImg {
+  background-image: url("./img/vault.svg");
+}
+
 .menuItem:hover .menuItemImg,
 .menuItem.active .menuItemImg {
   width: 48px;

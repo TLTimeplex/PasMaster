@@ -6,7 +6,7 @@ import { MasterPassword } from "../masterPassword";
 
 export const Navigation = () => {
   const [currentPage, setCurrentPage] = useState<JSX.Element>(<></>);
-  const [isLogged, setIsLogged] = useState<boolean>(true); // TODO: Change to false 
+  const [isLogged, setIsLogged] = useState<boolean>(false); // TODO: Change to false 
 
   // PAGES //
   const page_gp = <PageGeneratePassword></PageGeneratePassword>;
@@ -16,12 +16,19 @@ export const Navigation = () => {
   const buttons = ['menu_password', 'menu_generator'];
 
   const setActive = (target: HTMLElement) => {
-    buttons.forEach(buttonName => {
-      const button = document.getElementById(buttonName) as HTMLDivElement;
-      button.classList.remove('active');
-    });
+    checkIfUserIsLogged().then((res) => {
+      if (!res) {
+        setCurrentPage(<></>);
+        setIsLogged(false);
+        return;
+      }
+      buttons.forEach(buttonName => {
+        const button = document.getElementById(buttonName) as HTMLDivElement;
+        button.classList.remove('active');
+      });
 
-    target.classList.add('active');
+      target.classList.add('active')
+    });
   }
 
   return (
@@ -60,4 +67,9 @@ export const Navigation = () => {
       }
     </div>
   );
+}
+
+async function checkIfUserIsLogged(): Promise<boolean> {
+  const user = await window.masterPassword.info();
+  return user.isLoggedIn;
 }

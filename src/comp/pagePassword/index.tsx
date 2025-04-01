@@ -23,7 +23,7 @@ export const PagePassword = () => {
    */
   async function loadIndex(refresh = false) {
     if (isInit && !refresh) return;
-    const index = await window.index.getIndex();
+    const index = await window.passwordEntry.getIndex();
     const localIndex: localIndexElement[] = [];
 
     for (const category in index) {

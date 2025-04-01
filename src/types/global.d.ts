@@ -1,12 +1,17 @@
 interface Window {
-  index: {
-    getIndex: () => Promise<Index>;
-  };
   darkMode: {
     toggle: () => Promise<void>;
     system: () => Promise<void>;
   };
   passwordEntry: {
+    /**
+     * Get the index of all entries
+     * @returns The index of all entries
+     */
+    getIndex: () => Promise<Index>;
+    /**
+     * Get a entry by id
+     */
     getEntry: (id: string) => Promise<PasswordEntry>;
     setEntry: (entry: PasswordEntry, category?: string) => Promise<void>;
     /**
@@ -19,6 +24,10 @@ interface Window {
     deleteEntry: (id: string) => Promise<void>;
   };
   masterPassword: {
+    /**
+     * Get all users
+     * @returns A list of all users (Usernames)
+     */
     getAllUsers: () => Promise<string[]>;
     /**
      * Create a new user account
@@ -39,14 +48,62 @@ interface Window {
      * @returns 
      */
     logout: () => Promise<void>;
+    /**
+     * Get the current user account information
+     * @returns The current user account information with password set to ""
+     */
+    info: () => Promise<UserInstance>;
   };
 }
 
-interface PasswordEntry {
+interface PasswordEntryDB {
   id: string;
   title: string;
   url: string;
   username: string;
+  iv: string;
   password: string;
   notes: string;
+  category: string;
+  created: Date;
+  modified: Date;
+  tags: Array<string>;
+  synced: any; // TODO: Define Type
+}
+
+interface PasswordEntry {
+  id?: string;
+  title?: string;
+  url?: string;
+  username?: string;
+  password?: string;
+  notes?: string;
+  category?: string;
+  created?: Date;
+  modified?: Date;
+  tags?: Array<string>;
+  synced?: any; // TODO: Define Type
+}
+
+interface UserInstance {
+  username: string;
+  password: string;
+  uid: string;
+  isLoggedIn: boolean;
+}
+
+interface IndexEntry {
+  id: string;
+  title: string;
+  subtitle?: string;
+}
+
+interface IndexEntryCategory {
+  Titel: string;
+  Color?: string;
+  entries: Array<IndexEntry>;
+}
+
+interface Index {
+  [category: string]: IndexEntryCategory;
 }

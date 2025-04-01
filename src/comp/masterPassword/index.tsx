@@ -124,6 +124,7 @@ export const MasterPassword = (props: MasterPasswordProps) => {
       window.masterPassword.createUser(username, password).then((res) => {
         const field = document.getElementById('UsernameInput');
         const error = document.getElementById('UsernameInputError');
+        console.log(res);
         switch (res) {
           case "Success":
             props.onLogin();

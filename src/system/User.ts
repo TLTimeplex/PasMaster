@@ -13,16 +13,17 @@ export class PMUser implements UserInstance {
     this.isLoggedIn = isLoggedIn;
   }
 
-  generateMasterKey = (iv: crypto.BinaryLike) => {
+  generateMasterKey = (iv: Buffer) => {
     if (!this.isLoggedIn) throw new Error("No user logged in");
-    return crypto.createCipheriv("aes-256-ctr", this.password, iv);
+    const key = crypto.createHash('sha256').update(this.password).digest('base64').substring(0, 32);
+    return crypto.createCipheriv("aes-256-ctr", Buffer.from(key), iv);
   }
 
   generateIV = () => {
-    return crypto.randomBytes(16).toString("hex");
+    return crypto.randomBytes(16);
   }
 
-  decryptIV = (data: string, iv: crypto.BinaryLike) => {
+  decryptIV = (data: string, iv: Buffer) => {
     if (!this.isLoggedIn) throw new Error("No user logged in");
     return this.generateMasterKey(iv).update(data, "hex", "utf-8");
   }
@@ -31,8 +32,12 @@ export class PMUser implements UserInstance {
     return key.update(data, "hex", "utf-8");
   }
 
-  encryptIV = (data: string, iv: crypto.BinaryLike) => {
+  encryptIV = (data: string, iv: Buffer) => {
     if (!this.isLoggedIn) throw new Error("No user logged in");
+
+    console.log("Encrypting data:", data);
+    console.log("IV:", iv.toString("hex"));
+
     return this.generateMasterKey(iv).update(data, "utf-8", "hex");
   }
 

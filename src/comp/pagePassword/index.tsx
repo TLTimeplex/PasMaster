@@ -4,7 +4,7 @@ import './style.css'
 import { PasswordEntryProps } from './entry';
 
 type localIndexElement = {
-  key: string;
+  key: number;
   title: string;
   color: string;
   entries: Array<PasswordEntryProps>;
@@ -23,15 +23,18 @@ export const PagePassword = () => {
    */
   async function loadIndex(refresh = false) {
     if (isInit && !refresh) return;
-    const index = await window.passwordEntry.getIndex();
+    const index: Index = await window.passwordEntry.getIndex();
     const localIndex: localIndexElement[] = [];
 
-    for (const category in index) {
+    for (const categoryID in index) {
       const entries: PasswordEntryProps[] = [];
-      for (const entry of index[category].entries) {
+      if (index[categoryID].entries.length == 0) continue;
+      
+      for (const entry of index[categoryID].entries) {
         entries.push({ entryTitle: entry.title, entrySubTitle: entry.subtitle, callback: () => setCurrentId(entry.id) });
       }
-      localIndex.push({ key: category, title: index[category].Titel, color: index[category].Color, entries: entries });
+      // THIS IS STUPID, categoryID is a number but typescript thinks it is a string, so we have to parse it to a number 
+      localIndex.push({ key: parseInt(categoryID) , title: index[categoryID].titel, color: index[categoryID].color, entries: entries }); 
     }
 
     setIndex(localIndex);

@@ -53,10 +53,10 @@ export const createUser = async (userDB: Database, user: PMUser, username: strin
 
   await passwordDB.exec(
     `CREATE TABLE IF NOT EXISTS "category"  (
-      "name"	    TEXT NOT NULL UNIQUE,
+      "id"	      INTEGER NOT NULL UNIQUE,
       "color"	    TEXT NOT NULL,
       "titel"	    TEXT NOT NULL,
-      PRIMARY KEY("Name")
+      PRIMARY KEY("id" AUTOINCREMENT)
     );`);
 
   await passwordDB.exec(
@@ -74,11 +74,11 @@ export const createUser = async (userDB: Database, user: PMUser, username: strin
       "tags"	    TEXT NOT NULL,
       "synced"	  TEXT NOT NULL,
       PRIMARY KEY("id"),
-	    CONSTRAINT passwords_category_FK FOREIGN KEY (category) REFERENCES category(name)
+	    CONSTRAINT passwords_category_FK FOREIGN KEY (category) REFERENCES category(id)
     );`);
-  
+
   await passwordDB.exec(
-    `INSERT INTO category (name, color, titel) VALUES ('default', '#000000', 'Default');`);
+    `INSERT INTO category (id, color, titel) VALUES (0, '#000000', 'Default');`);
 
   return "Success";
 }

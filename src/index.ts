@@ -144,3 +144,58 @@ ipcMain.handle('passwordEntry:getIndex', async () => {
   const passwordDB = await connectPasswordDB();
   return await PasswordControl.getIndex(passwordDB);
 });
+
+ipcMain.handle('passwordEntry:get', async (_, id: string) => {
+  if (!_user.isLoggedIn) throw new Error("No user logged in");
+  const passwordDB = await connectPasswordDB();
+  return await PasswordControl.getEntry(passwordDB, _user, id);
+});
+
+ipcMain.handle('passwordEntry:add', async (_, entry: PasswordEntry) => {
+  if (!_user.isLoggedIn) throw new Error("No user logged in");
+  const passwordDB = await connectPasswordDB();
+  return await PasswordControl.addEntry(passwordDB, _user, entry);
+});
+
+ipcMain.handle('passwordEntry:update', async (_, entry: PasswordEntry) => {
+  if (!_user.isLoggedIn) throw new Error("No user logged in");
+  const passwordDB = await connectPasswordDB();
+  return await PasswordControl.updateEntry(passwordDB, _user, entry);
+});
+
+ipcMain.handle('passwordEntry:delete', async (_, id: string) => {
+  if (!_user.isLoggedIn) throw new Error("No user logged in");
+  const passwordDB = await connectPasswordDB();
+  return await PasswordControl.deleteEntry(passwordDB, _user, id);
+});
+
+// CATEGORIES
+ipcMain.handle('passwordEntry:addCategory', async (_, category: Category) => {
+  if (!_user.isLoggedIn) throw new Error("No user logged in");
+  const passwordDB = await connectPasswordDB();
+  return await PasswordControl.addCategory(passwordDB, _user, category.titel, category.color);
+});
+
+ipcMain.handle('passwordEntry:deleteCategory', async (_, id: number) => {
+  if (!_user.isLoggedIn) throw new Error("No user logged in");
+  const passwordDB = await connectPasswordDB();
+  return await PasswordControl.deleteCategory(passwordDB, _user, id);
+});
+
+ipcMain.handle('passwordEntry:updateCategory', async (_, id: number, category: Category) => {
+  if (!_user.isLoggedIn) throw new Error("No user logged in");
+  const passwordDB = await connectPasswordDB();
+  return await PasswordControl.updateCategory(passwordDB, _user, id, category.titel, category.color);
+});
+
+ipcMain.handle('passwordEntry:getAllCategories', async () => {
+  if (!_user.isLoggedIn) throw new Error("No user logged in");
+  const passwordDB = await connectPasswordDB();
+  return await PasswordControl.getAllCategories(passwordDB, _user);
+});
+
+ipcMain.handle('passwordEntry:getCategory', async (_, id: number) => {
+  if (!_user.isLoggedIn) throw new Error("No user logged in");
+  const passwordDB = await connectPasswordDB();
+  return await PasswordControl.getCategory(passwordDB, _user, id);
+});

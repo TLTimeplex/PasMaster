@@ -10,9 +10,15 @@ contextBridge.exposeInMainWorld('darkMode', {
 contextBridge.exposeInMainWorld('passwordEntry', {
   getIndex: () => ipcRenderer.invoke('passwordEntry:getIndex'),
   getEntry: (id: string) => ipcRenderer.invoke('passwordEntry:get', id),
-  setEntry: (entry: PasswordEntry, category?: string) => ipcRenderer.invoke('passwordEntry:set', entry, category),
-  addEntry: (entry: PasswordEntry, category?: string) => ipcRenderer.invoke('passwordEntry:add', entry, category),
-  deleteEntry: (id: string) => ipcRenderer.invoke('passwordEntry:delete', id)
+  addEntry: (entry: PasswordEntry) => ipcRenderer.invoke('passwordEntry:add', entry),
+  updateEntry: (entry: PasswordEntry) => ipcRenderer.invoke('passwordEntry:update', entry),
+  deleteEntry: (id: string) => ipcRenderer.invoke('passwordEntry:delete', id),
+
+  addCategory: (category: Category) => ipcRenderer.invoke('passwordEntry:addCategory', category),
+  deleteCategory: (id: number) => ipcRenderer.invoke('passwordEntry:deleteCategory', id),
+  updateCategory: (id: number, category: Category) => ipcRenderer.invoke('passwordEntry:updateCategory', id, category),
+  getAllCategories: () => ipcRenderer.invoke('passwordEntry:getAllCategories'),
+  getCategory: (id: number) => ipcRenderer.invoke('passwordEntry:getCategory', id),
 })
 
 contextBridge.exposeInMainWorld('masterPassword', {

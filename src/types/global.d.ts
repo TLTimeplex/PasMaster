@@ -5,23 +5,64 @@ interface Window {
   };
   passwordEntry: {
     /**
-     * Get the index of all entries
-     * @returns The index of all entries
+     * Get all password entries
+     * @returns A list of all password entries
      */
     getIndex: () => Promise<Index>;
     /**
-     * Get a entry by id
+     * Get a password entry by id
+     * @param id The id of the password entry
+     * @returns The password entry with the given id
      */
     getEntry: (id: string) => Promise<PasswordEntry>;
-    setEntry: (entry: PasswordEntry, category?: string) => Promise<void>;
     /**
-     * Add a Entry to the password storage
-     * @param entry The entry to add, id will not be read
-     * @param category The category to add the entry to, if not provided the entry will be added to the default category
-     * @returns The id of the added entry
+     * Add a password entry
+     * @param entry The password entry to add
+     * @returns The id of the added password entry
      */
-    addEntry: (entry: PasswordEntry, category?: string) => Promise<string>;
+    addEntry: (entry: PasswordEntry) => Promise<void>;
+    /**
+     * Update a password entry
+     * @param entry The password entry to update
+     * @returns The id of the updated password entry
+     */
+    updateEntry: (entry: PasswordEntry) => Promise<void>;
+    /**
+     * Delete a password entry by id
+     * @param id The id of the password entry to delete
+     * @returns The id of the deleted password entry
+     */
     deleteEntry: (id: string) => Promise<void>;
+    /**
+     * Add a category
+     * @param category The category to add
+     * @returns The id of the added category
+     */
+    addCategory: (category: Category) => Promise<void>;
+    /**
+     * Delete a category by id
+     * @param id The id of the category to delete
+     * @returns The id of the deleted category
+     */
+    deleteCategory: (id: number) => Promise<void>;
+    /**
+     * Update a category by id
+     * @param id The id of the category to update
+     * @param category The category to update
+     * @returns The id of the updated category
+     */
+    updateCategory: (id: number, category: Category) => Promise<void>;
+    /**
+     * Get all categories
+     * @returns A list of all categories
+     */
+    getAllCategories: () => Promise<CategoryDB[]>;
+    /**
+     * Get a category by id
+     * @param id The id of the category to get
+     * @returns The category with the given id
+     */
+    getCategory: (id: number) => Promise<CategoryDB>;
   };
   masterPassword: {
     /**
@@ -64,11 +105,17 @@ interface PasswordEntryDB {
   iv: string;
   password: string;
   notes: string;
-  category: string;
+  category: number;
   created: Date;
   modified: Date;
   tags: Array<string>;
-  synced: any; // TODO: Define Type
+  synced: Array<SyncedConnection>;
+}
+
+interface SyncedConnection {
+  // TODO: Define Type
+  ip: string;
+  port: number;
 }
 
 interface PasswordEntry {
@@ -78,7 +125,7 @@ interface PasswordEntry {
   username?: string;
   password?: string;
   notes?: string;
-  category?: string;
+  category?: number;
   created?: Date;
   modified?: Date;
   tags?: Array<string>;
@@ -98,12 +145,19 @@ interface IndexEntry {
   subtitle?: string;
 }
 
-interface IndexEntryCategory {
-  Titel: string;
-  Color?: string;
+interface IndexEntryCategory extends Category {
   entries: Array<IndexEntry>;
 }
 
+interface CategoryDB extends Category {
+  id: number;
+}
+
+interface Category {
+  titel: string;
+  color?: string;
+}
+
 interface Index {
-  [category: string]: IndexEntryCategory;
+  [categoryID: number]: IndexEntryCategory;
 }

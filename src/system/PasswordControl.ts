@@ -33,7 +33,7 @@ export const getIndex = async (passwordDB: Database): Promise<Index> => {
 export const getEntry = async (passwordDB: Database, user: PMUser, id: string): Promise<PasswordEntry> => {
   const entry = await (await passwordDB.prepare("SELECT * FROM passwords WHERE id = ?")).get(id);
   if (!entry) throw new Error("Entry not found");
-  const decryptedPassword = user.decrypt(entry.password, entry.iv);
+  const decryptedPassword = user.decryptIV(entry.password, entry.iv);
   return {
     id: entry.id,
     title: entry.title,
@@ -49,10 +49,8 @@ export const getEntry = async (passwordDB: Database, user: PMUser, id: string): 
   };
 }
 
-export const addEntry = async (passwordDB: Database, user: PMUser, entry: PasswordEntry): Promise<void> => {
+export const addEntry = async (passwordDB: Database, user: PMUser, entry: PasswordEntry): Promise<string> => {
   if (!user.isLoggedIn) throw new Error("No user logged in");
-
-  console.log("Adding entry:", entry);
 
   const iv = user.generateIV();
 
@@ -60,7 +58,6 @@ export const addEntry = async (passwordDB: Database, user: PMUser, entry: Passwo
   const title = entry.title || "";
   const url = entry.url || "";
   const username = entry.username || "";
-  console.log("Password to encrypt:", entry.password);
   const password = entry.password != null ? user.encryptIV(entry.password, iv) : "";
   const notes = entry.notes || "";
   const category = entry.category || 0;
@@ -70,6 +67,8 @@ export const addEntry = async (passwordDB: Database, user: PMUser, entry: Passwo
   const synced = entry.synced ? JSON.stringify(entry.synced) : "[]";
 
   await passwordDB.run(`INSERT INTO passwords (id, title, url, username, password, iv, notes, category, created, modified, tags, synced) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`, id, title, url, username, password, iv, notes, category, created, modified, tags, synced);
+
+  return id;
 }
 
 export const updateEntry = async (passwordDB: Database, user: PMUser, updateEntry: PasswordEntry): Promise<void> => {
@@ -87,7 +86,7 @@ export const updateEntry = async (passwordDB: Database, user: PMUser, updateEntr
   const username = updateEntry.username || existingEntry.username || "";
   const password = updateEntry.password !== null ? user.encryptIV(updateEntry.password, iv) : (existingEntry.password || "");
   const notes = updateEntry.notes || existingEntry.notes || "";
-  const category = updateEntry.category || existingEntry.category || 0;
+  const category = Number.isInteger(updateEntry.category) ? updateEntry.category : existingEntry.category || 0;
   const created = existingEntry.created;
   const modified = new Date().toISOString();
   const tags = updateEntry.tags != null ? JSON.stringify(updateEntry.tags) : existingEntry.tags || "[]";

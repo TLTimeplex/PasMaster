@@ -35,9 +35,6 @@ export class PMUser implements UserInstance {
   encryptIV = (data: string, iv: Buffer) => {
     if (!this.isLoggedIn) throw new Error("No user logged in");
 
-    console.log("Encrypting data:", data);
-    console.log("IV:", iv.toString("hex"));
-
     return this.generateMasterKey(iv).update(data, "utf-8", "hex");
   }
 

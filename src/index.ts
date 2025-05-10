@@ -29,7 +29,7 @@ const createWindow = (): void => {
       height: 32
     },
     minWidth: 800,
-    minHeight: 600,
+    minHeight: 800,
     center: true,
   });
 

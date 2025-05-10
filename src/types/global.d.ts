@@ -20,7 +20,7 @@ interface Window {
      * @param entry The password entry to add
      * @returns The id of the added password entry
      */
-    addEntry: (entry: PasswordEntry) => Promise<void>;
+    addEntry: (entry: PasswordEntry) => Promise<string>;
     /**
      * Update a password entry
      * @param entry The password entry to update

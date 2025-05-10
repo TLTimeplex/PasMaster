@@ -78,7 +78,7 @@ export const createUser = async (userDB: Database, user: PMUser, username: strin
     );`);
 
   await passwordDB.exec(
-    `INSERT INTO category (id, color, titel) VALUES (0, '#000000', 'Default');`);
+    `INSERT INTO category (id, color, titel) VALUES (0, '#ffffff', 'Default');`);
 
   return "Success";
 }

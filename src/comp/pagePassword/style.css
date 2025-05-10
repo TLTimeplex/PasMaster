@@ -1,12 +1,39 @@
-#catalog {
+.catalogContainer {
   width: 240px;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+#catalog {
+  width: 100%;
+  height: calc(100% - 3rem);
   overflow-y: scroll;
   overflow-x: hidden;
   --sb-track-color: #0000;
   --sb-thumb-color: #92492000;
   --sb-size: 6px;
   user-select: none;
+}
+
+#addNewEntry {
+  width: 100%;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #202020;
+  color: #ccc;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-sizing: border-box;
+  border-top: 1px solid #cccc;
+}
+
+#addNewEntry:hover {
+  background: #303030;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -56,7 +83,6 @@
 
 @supports not selector(::-webkit-scrollbar) {
   #catalog {
-      scrollbar-color: var(--sb-thumb-color)
-                     var(--sb-track-color);
+    scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
   }
 }

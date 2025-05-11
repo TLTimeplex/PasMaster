@@ -2,7 +2,9 @@ import React from "react";
 import { PasswordCategory } from "./category";
 import "./style.css";
 import { PasswordEntry, PasswordEntryProps } from "./entry";
-import { PasswordView } from "./view";
+import { PasswordView } from "./view2";
+
+const NEW_ENTRY = "new";
 
 type localIndexElement = {
   key: number;
@@ -81,13 +83,13 @@ export const PagePassword = () => {
             );
           })}
         </div>
-        <div id="addNewEntry" onClick={() => { setCurrentId("new"); }}>
+        <div id="addNewEntry" onClick={() => { setCurrentId(NEW_ENTRY); }}>
           + New Entry
         </div>
       </div>
       <div id="passwordView">
         {currentId !== "" ? (
-          <PasswordView entryID={currentId} key={currentId} onDelete={() => { setCurrentId(""); loadIndex(true) }}></PasswordView>
+          <PasswordView entryID={currentId} key={currentId} onDelete={() => { setCurrentId(""); loadIndex(true) }} onSave={() => {loadIndex(true)}} isNewEntry={currentId == NEW_ENTRY}></PasswordView>
         ) : (
           <></>
         )}

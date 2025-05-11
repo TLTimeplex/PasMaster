@@ -1,0 +1,23 @@
+.view-toolbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 3rem;
+  background: #0001;
+}
+
+.view-toolbar button {
+  font-size: 1.5rem;
+  border: none;
+  color: #aaa;
+  background: none;
+  padding: 0.5rem 1rem;
+  user-select: none;
+}
+
+.view-toolbar button:hover {
+  color: #fff;
+  cursor: pointer;
+}

@@ -16,7 +16,7 @@ export const getIndex = async (passwordDB: Database): Promise<Index> => {
   const result: Index = {};
   const categories = await (await passwordDB.prepare("SELECT * FROM category")).all() as CategoryDB[];
   for (const category of categories) {
-    const entries = await (await passwordDB.prepare("SELECT * FROM passwords WHERE category = ?")).all(category.id);
+    const entries = await (await passwordDB.prepare("SELECT * FROM passwords WHERE category = ? ORDER BY title, username")).all(category.id);
     result[category.id] = {
       titel: category.titel,
       color: category.color,
@@ -90,7 +90,7 @@ export const updateEntry = async (passwordDB: Database, user: PMUser, updateEntr
   const created = existingEntry.created;
   const modified = new Date().toISOString();
   const tags = updateEntry.tags != null ? JSON.stringify(updateEntry.tags) : existingEntry.tags || "[]";
-  const synced = JSON.stringify(updateEntry.synced);
+  const synced = JSON.stringify(updateEntry.synced || existingEntry.synced || []);
 
   await passwordDB.run(`UPDATE passwords SET title = ?, url = ?, username = ?, password = ?, iv = ?, notes = ?, category = ?, created = ?, modified = ?, tags = ?, synced = ? WHERE id = ?`, title, url, username, password, iv, notes, category, created, modified, tags, synced, id);
 }

@@ -1,32 +1,31 @@
 import { useState } from "react";
+import "./style.css";
 
 interface ViewToolbarProp {
   onEdit: () => void;
   onRevert: () => void;
   onDelete: () => void;
   onSave: () => void;
-  editMode?: boolean;
+  editMode: boolean;
 }
 
 export const ViewToolbar = (props: ViewToolbarProp) => {
-  const [editMode, setEditMode] = useState(props.editMode || false);
   const [deleteMode, setDeleteMode] = useState(false);
 
   const toggleEditMode = () => {
-    setEditMode(!editMode);
     props.onEdit();
   };
 
   const toggleDeleteMode = () => {
     setDeleteMode(!deleteMode);
-    props.onDelete();
   };
 
   return (
     <div className="view-toolbar">
-      <button onClick={toggleEditMode}>{editMode ? "Cancel" : "Edit"}</button>
+      <button onClick={toggleEditMode}>{props.editMode ? "Cancel" : "Edit"}</button>
+      {props.editMode && (<button onClick={props.onSave}>Save</button>)}
+      {deleteMode && (<button onClick={props.onDelete}>Confirm</button>)}
       <button onClick={toggleDeleteMode}>{deleteMode ? "Cancel" : "Delete"}</button>
-      <button onClick={props.onSave}>Save</button>
     </div>
   );
 }

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { ViewToolbar } from "./toolbar";
 import { TextInput } from "./TextInput";
 import "./style.css";
+import { CategorySelect } from "./CategorySelect";
 
 const MAX_RETRIES = 5;
 
@@ -15,7 +16,6 @@ interface PasswordViewProp {
 }
 
 export const PasswordView = (props: PasswordViewProp) => {
-  console.log("PasswordView", props);
   const [entry, setEntry] = useState<PasswordEntry>({});
 
   const [id, setID] = useState<string>(props.entryID);
@@ -75,16 +75,17 @@ export const PasswordView = (props: PasswordViewProp) => {
 
   React.useEffect(() => {
     if (isInit) return;
+
+    loadCategories();
+
     if (props.isNewEntry) {
       setLoading(false);
       setEditMode(true);
 
-      loadCategories();
-
       setIsInit(true);
       return;
     }
-    console.log("Loading entry", id || props.entryID);
+
     window.passwordEntry
       .getEntry(id || props.entryID)
       .then((entry) => {
@@ -133,13 +134,16 @@ export const PasswordView = (props: PasswordViewProp) => {
       category: category,
     };
 
+    let newID = id;
+
     if (props.isNewEntry) {
-      setID(await window.passwordEntry.addEntry(newEntry));
+      newID = await window.passwordEntry.addEntry(newEntry);
+      setID(newID);
     } else {
       await window.passwordEntry.updateEntry(newEntry);
     }
 
-    await loadEntry(id);
+    await loadEntry(newID);
     props.onSave()
     setLoading(false);
   }
@@ -167,6 +171,17 @@ export const PasswordView = (props: PasswordViewProp) => {
               <TextInput type="password" value={password} onInputChange={(value) => setPassword(value)} label="Password" readOnly={!editMode} />
               <TextInput type="text" value={url} onInputChange={(value) => setUrl(value)} label="URL" readOnly={!editMode} />
               <TextInput type="text" value={notes} onInputChange={(value) => setNotes(value)} label="Notes" readOnly={!editMode} />
+              {editMode && (
+                <>
+                  <TextInput type="text" value={tags.join(",")} onInputChange={(value) => setTags(value.split(","))} label="Tags" readOnly={!editMode} />
+                  <CategorySelect 
+                    categories={categories}
+                    selectedCategory={category}
+                    onCategoryChange={(value) => setCategory(value.id)}
+                    readOnly={!editMode}
+                  />
+                </>
+              )}
             </>
           )}
         </div>
@@ -185,7 +200,7 @@ export const PasswordView = (props: PasswordViewProp) => {
           </div>
         </div>
       </div>
-      <ViewToolbar editMode={editMode} onEdit={() => { setEditMode(true) }} onRevert={restoreEntry} onDelete={deleteEntry} onSave={saveEntry} />
+      <ViewToolbar editMode={editMode} onEdit={() => { setEditMode(true); loadCategories(); }} onRevert={restoreEntry} onDelete={deleteEntry} onSave={saveEntry} />
     </div>
   );
 }

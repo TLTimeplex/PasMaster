@@ -38,7 +38,6 @@ export const PagePassword = () => {
           entrySubTitle: entry.subtitle,
           callback: () => {
             setCurrentId(entry.id);
-            console.log("clicked", entry.id);
           },
         });
       }

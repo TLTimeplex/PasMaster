@@ -1,0 +1,22 @@
+.category-select {
+  width: 100%;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.category-select select {
+  width: 360px;
+  height: 40px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #000;
+  background: white;
+  color: black;
+  font-size: 16px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  text-align: center;
+}

@@ -22,7 +22,7 @@ export const ViewToolbar = (props: ViewToolbarProp) => {
 
   return (
     <div className="view-toolbar">
-      <button onClick={toggleEditMode}>{props.editMode ? "Cancel" : "Edit"}</button>
+      <button onClick={() => props.editMode? props.onRevert() : toggleEditMode()}>{props.editMode ? "Cancel" : "Edit"}</button>
       {props.editMode && (<button onClick={props.onSave}>Save</button>)}
       {deleteMode && (<button onClick={props.onDelete}>Confirm</button>)}
       <button onClick={toggleDeleteMode}>{deleteMode ? "Cancel" : "Delete"}</button>
